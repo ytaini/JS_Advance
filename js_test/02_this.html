@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    function Person(color) {
+        console.log(this)
+
+        this.color = color
+        this.getColor = function () {
+            console.log(this)
+            return this.color
+        }
+
+        this.setColor = function () {
+            console.log(this)
+            this.color = color
+        }
+    }
+
+    Person("yellow"); // this -> window
+
+    let p = new Person("red"); //this -> p 即Person {}
+
+    p.getColor() // this -> p
+
+    let obj = {}
+
+    p.setColor.call(obj,"123")// this -> obj
+
+    let test = p.setColor;
+    test() //this -> window
+
+    function fn1() {
+        function fn2() {
+            console.log(this)
+        }
+
+        fn2()
+    }
+
+    fn1() // this -> window
+</script>
+</body>
+</html>
